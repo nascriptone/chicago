@@ -66,7 +66,7 @@ fun ChicagoApp() {
             Button(onClick = {}) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(imageVector = Icons.Default.Settings, contentDescription = null)
-                    Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.width(18.dp))
                     Text(text = "Settings")
                 }
             }
