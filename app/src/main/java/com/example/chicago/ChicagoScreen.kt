@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,6 +25,7 @@ fun AppTopBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun ChicagoApp() {
+    val navController = rememberNavController()
     Scaffold(
         topBar = {
             AppTopBar()

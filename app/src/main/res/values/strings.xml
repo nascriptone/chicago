@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Chicago</string>
+    <string name="museums">Museums</string>
+    <string name="parks">Parks</string>
+    <string name="theatres">Theatres</string>
+    <string name="shopping_centres">Shopping Centres</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="historical_sites">Historical Sites</string>
 </resources>
