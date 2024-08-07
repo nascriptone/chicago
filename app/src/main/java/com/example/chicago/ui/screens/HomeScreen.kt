@@ -1,9 +1,12 @@
-package com.example.chicago.ui
+package com.example.chicago.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -22,8 +26,33 @@ import com.example.chicago.ui.theme.ChicagoTheme
 
 
 @Composable
-fun CategoryCard(category: Category, modifier: Modifier = Modifier) {
-    Card(modifier = modifier) {
+fun HomeScreen(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val data = DataSource.categoryList
+    LazyColumn(modifier) {
+        items(data) { category ->
+            CategoryCard(
+                category = category,
+                onCardClick = onClick,
+                modifier = Modifier.padding(vertical = 8.dp, horizontal = 4.dp)
+            )
+        }
+    }
+}
+
+
+@Composable
+fun CategoryCard(
+    category: Category,
+    onCardClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        onClick = onCardClick,
+        modifier = modifier
+    ) {
         Box {
             Image(
                 painter = painterResource(id = category.image),
@@ -36,6 +65,7 @@ fun CategoryCard(category: Category, modifier: Modifier = Modifier) {
             )
             Text(
                 text = stringResource(id = category.title),
+                color = Color.White,
                 style = MaterialTheme.typography.displaySmall,
                 modifier = Modifier.align(Alignment.Center)
             )
@@ -48,7 +78,7 @@ fun CategoryCard(category: Category, modifier: Modifier = Modifier) {
 @Composable
 fun CategoryCardPreview() {
     ChicagoTheme {
-        val category1 = DataSource.categoryList[0]
-        CategoryCard(category1)
+        val category1 = DataSource.categoryList[3]
+        CategoryCard(category1, onCardClick = {})
     }
 }
