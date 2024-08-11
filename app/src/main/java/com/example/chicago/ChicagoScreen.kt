@@ -68,26 +68,3 @@ fun ChicagoApp() {
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun ScreensPreview() {
-//    ChicagoTheme {
-//        Scaffold(
-//            topBar = {
-//                AppTopBar()
-//            }
-//        ) {
-//            NavHost(
-//                navController = rememberNavController(),
-//                modifier = Modifier
-//                    .padding(it),
-//                startDestination = ChicagoScreen.Home.name
-//            ) {
-//                composable(route = ChicagoScreen.Home.name) {
-//                    HomeScreen(onClick = { /*TODO*/ })
-//                }
-//            }
-//        }
-//    }
-//}
