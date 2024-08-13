@@ -7,11 +7,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.chicago.ui.screens.DetailsScreen
+import com.example.chicago.ui.ChicagoViewModel
+import com.example.chicago.ui.screens.DetailScreen
 import com.example.chicago.ui.screens.HomeScreen
 import com.example.chicago.ui.screens.RecomScreen
 
@@ -35,7 +39,13 @@ fun AppTopBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun ChicagoApp() {
+
+    val viewModel: ChicagoViewModel = viewModel()
     val navController = rememberNavController()
+
+    val uiState by viewModel.uiState.collectAsState()
+
+
     Scaffold(
         topBar = {
             AppTopBar()
@@ -50,20 +60,22 @@ fun ChicagoApp() {
         ) {
             composable(route = ChicagoScreen.Home.name) {
                 HomeScreen(
-                    onClick = {
+                    onCardClick = {
+                        viewModel.updateSelectedCategory(it)
                         navController.navigate(ChicagoScreen.Recommendation.name)
                     }
                 )
             }
             composable(route = ChicagoScreen.Recommendation.name) {
                 RecomScreen(
-                    onClick = {
+                    selectedCategory = uiState.selectedCategory,
+                    onCardClick = {
                         navController.navigate(ChicagoScreen.Details.name)
                     }
                 )
             }
             composable(route = ChicagoScreen.Details.name) {
-                DetailsScreen()
+                DetailScreen()
             }
         }
     }

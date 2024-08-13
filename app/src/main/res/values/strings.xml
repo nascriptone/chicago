@@ -1,9 +1,206 @@
 <resources>
+
     <string name="app_name">Chicago</string>
+
+    <!-- Museum -->
+
     <string name="museums">Museums</string>
+
+    <string name="museum_name1">The Art Institute of Chicago</string>
+    <string name="museum_description1">One of the oldest and largest art museums in the United States.</string>
+    <string name="museum_place1">111 S Michigan Ave, Chicago, IL 60603</string>
+    <string name="museum_open1">10:30 AM</string>
+    <string name="museum_close1">5:00 PM</string>
+
+    <string name="museum_name2">Field Museum of Natural History</string>
+    <string name="museum_description2">A natural history museum with vast exhibits on ancient civilizations, fossils, and more.</string>
+    <string name="museum_place2">1400 S Lake Shore Dr, Chicago, IL 60605</string>
+    <string name="museum_open2">9:00 AM</string>
+    <string name="museum_close2">5:00 PM</string>
+
+    <string name="museum_name3">Museum of Science and Industry</string>
+    <string name="museum_description3">The largest science museum in the Western Hemisphere.</string>
+    <string name="museum_place3">5700 S Lake Shore Dr, Chicago, IL 60637</string>
+    <string name="museum_open3">9:30 AM</string>
+    <string name="museum_close3">4:00 PM</string>
+
+    <string name="museum_name4">Chicago History Museum</string>
+    <string name="museum_description4">Museum dedicated to Chicago\'s rich history.</string>
+    <string name="museum_place4">1601 N Clark St, Chicago, IL 60614</string>
+    <string name="museum_open4">9:30 AM</string>
+    <string name="museum_close4">4:30 PM</string>
+
+    <string name="museum_name5">DuSable Museum of African American History</string>
+    <string name="museum_description5">A museum dedicated to the study and conservation of African American history and culture.</string>
+    <string name="museum_place5">740 E 56th Pl, Chicago, IL 60637</string>
+    <string name="museum_open5">10:00 AM</string>
+    <string name="museum_close5">5:00 PM</string>
+
+    <!-- Park -->
+
     <string name="parks">Parks</string>
+
+    <string name="park_name1">Millennium Park</string>
+    <string name="park_description1">A public park located in the Loop community area of Chicago.</string>
+    <string name="park_place1">201 E Randolph St, Chicago, IL 60602</string>
+    <string name="park_open1">6:00 AM</string>
+    <string name="park_close1">11:00 PM</string>
+
+    <string name="park_name2">Lincoln Park</string>
+    <string name="park_description2">A large park situated along the lakefront.</string>
+    <string name="park_place2">2045 N Lincoln Park W, Chicago, IL 60614</string>
+    <string name="park_open2">6:00 AM</string>
+    <string name="park_close2">11:00 PM</string>
+
+    <string name="park_name3">Grant Park</string>
+    <string name="park_description3">A large urban park in the Loop area of Chicago.</string>
+    <string name="park_place3">337 E Randolph St, Chicago, IL 60601</string>
+    <string name="park_open3">6:00 AM</string>
+    <string name="park_close3">11:00 PM</string>
+
+    <string name="park_name4">Jackson Park</string>
+    <string name="park_description4">A 500-acre park located on Chicago\'s South Side.</string>
+    <string name="park_place4">6401 S Stony Island Ave, Chicago, IL 60637</string>
+    <string name="park_open4">6:00 AM</string>
+    <string name="park_close4">11:00 PM</string>
+
+    <string name="park_name5">Garfield Park</string>
+    <string name="park_description5">One of Chicago\'s 77 officially designated community areas, located on the West Side.</string>
+    <string name="park_place5">300 N Central Park Ave, Chicago, IL 60624</string>
+    <string name="park_open5">6:00 AM</string>
+    <string name="park_close5">11:00 PM</string>
+
+    <!-- Theatre -->
+
     <string name="theatres">Theatres</string>
+
+    <string name="theatre_name1">Chicago Theatre</string>
+    <string name="theatre_description1">A historic theater and former movie palace.</string>
+    <string name="theatre_place1">175 N State St, Chicago, IL 60601</string>
+    <string name="theatre_open1">Varies by event</string>
+
+    <string name="theatre_name2">Goodman Theatre</string>
+    <string name="theatre_description2">A professional theater company.</string>
+    <string name="theatre_place2">170 N Dearborn St, Chicago, IL 60601</string>
+    <string name="theatre_open2">Varies by event</string>
+
+    <string name="theatre_name3">Steppenwolf Theatre</string>
+    <string name="theatre_description3">A Chicago theater company, founded in 1974.</string>
+    <string name="theatre_place3">1650 N Halsted St, Chicago, IL 60614</string>
+    <string name="theatre_open3">Varies by event</string>
+
+    <string name="theatre_name4">The Second City</string>
+    <string name="theatre_description4">An improvisational comedy enterprise.</string>
+    <string name="theatre_place4">1616 N Wells St, Chicago, IL 60614</string>
+    <string name="theatre_open4">Varies by event</string>
+
+    <string name="theatre_name5">Broadway in Chicago</string>
+    <string name="theatre_description5">Presents a full range of entertainment, from musicals to plays.</string>
+    <string name="theatre_place5">24 W Randolph St, Chicago, IL 60601</string>
+    <string name="theatre_open5">Varies by event</string>
+
+    <!-- Shopping Centre -->
+
     <string name="shopping_centres">Shopping Centres</string>
+
+    <string name="shopping_centre_name1">Water Tower Place</string>
+    <string name="shopping_centre_description1">A shopping mall in the Gold Coast neighborhood.</string>
+    <string name="shopping_centre_place1">835 N Michigan Ave, Chicago, IL 60611</string>
+    <string name="shopping_centre_open1">10:00 AM</string>
+    <string name="shopping_centre_close1">9:00 PM</string>
+
+    <string name="shopping_centre_name2">The Shops at North Bridge</string>
+    <string name="shopping_centre_description2">A shopping center located on the Magnificent Mile.</string>
+    <string name="shopping_centre_place2">520 N Michigan Ave, Chicago, IL 60611</string>
+    <string name="shopping_centre_open2">10:00 AM</string>
+    <string name="shopping_centre_close2">8:00 PM</string>
+
+    <string name="shopping_centre_name3">900 North Michigan Shops</string>
+    <string name="shopping_centre_description3">A shopping mall located in the Magnificent Mile area.</string>
+    <string name="shopping_centre_place3">900 N Michigan Ave, Chicago, IL 60611</string>
+    <string name="shopping_centre_open3">10:00 AM</string>
+    <string name="shopping_centre_close3">7:00 PM</string>
+
+    <string name="shopping_centre_name4">Fashion Outlets of Chicago</string>
+    <string name="shopping_centre_description4">An outlet mall located in the Chicago metropolitan area.</string>
+    <string name="shopping_centre_place4">5220 Fashion Outlets Way, Rosemont, IL 60018</string>
+    <string name="shopping_centre_open4">10:00 AM</string>
+    <string name="shopping_centre_close4">8:00 PM</string>
+
+    <string name="shopping_centre_name5">Block 37</string>
+    <string name="shopping_centre_description5">A shopping, dining, and entertainment complex.</string>
+    <string name="shopping_centre_place5">108 N State St, Chicago, IL 60602</string>
+    <string name="shopping_centre_open5">10:00 AM</string>
+    <string name="shopping_centre_close5">8:00 PM</string>
+
+    <!-- Restaurant -->
+
     <string name="restaurants">Restaurants</string>
+
+    <string name="restaurant_name1">Alinea</string>
+    <string name="restaurant_description1">A renowned fine dining restaurant offering contemporary cuisine.</string>
+    <string name="restaurant_place1">1723 N Halsted St, Chicago, IL 60614</string>
+    <string name="restaurant_open1">5:00 PM</string>
+    <string name="restaurant_close1">11:00 PM</string>
+
+    <string name="restaurant_name2">Girl &amp; the Goat</string>
+    <string name="restaurant_description2">A popular restaurant offering innovative American dishes.</string>
+    <string name="restaurant_place2">809 W Randolph St, Chicago, IL 60607</string>
+    <string name="restaurant_open2">4:30 PM</string>
+    <string name="restaurant_close2">11:00 PM</string>
+
+    <string name="restaurant_name3">Joe\'s Seafood, Prime Steak &amp; Stone Crab</string>
+    <string name="restaurant_description3">A classic seafood and steakhouse.</string>
+    <string name="restaurant_place3">60 E Grand Ave, Chicago, IL 60611</string>
+    <string name="restaurant_open3">11:30 AM</string>
+    <string name="restaurant_close3">10:00 PM</string>
+
+    <string name="restaurant_name4">Gibsons Bar &amp; Steakhouse</string>
+    <string name="restaurant_description4">A well-known steakhouse offering prime cuts and seafood.</string>
+    <string name="restaurant_place4">1028 N Rush St, Chicago, IL 60611</string>
+    <string name="restaurant_open4">11:00 AM</string>
+    <string name="restaurant_close4">12:00 AM</string>
+
+    <string name="restaurant_name5">Lou Malnati\'s Pizzeria</string>
+    <string name="restaurant_description5">Famous for its deep-dish pizza.</string>
+    <string name="restaurant_place5">439 N Wells St, Chicago, IL 60654</string>
+    <string name="restaurant_open5">11:00 AM</string>
+    <string name="restaurant_close5">11:00 PM</string>
+
+    <!-- Historical Site -->
+
     <string name="historical_sites">Historical Sites</string>
+
+    <string name="historical_site_name1">Navy Pier</string>
+    <string name="historical_site_description1">A 3,300-foot-long pier on the Chicago shoreline of Lake Michigan.</string>
+    <string name="historical_site_place1">600 E Grand Ave, Chicago, IL 60611</string>
+    <string name="historical_site_open1">10:00 AM</string>
+    <string name="historical_site_close1">8:00 PM</string>
+
+    <string name="historical_site_name2">Wrigley Field</string>
+    <string name="historical_site_description2">A historic baseball park and home of the Chicago Cubs.</string>
+    <string name="historical_site_place2">1060 W Addison St, Chicago, IL 60613</string>
+    <string name="historical_site_open2">Varies by event</string>
+
+    <string name="historical_site_name3">Willis Tower (Sears Tower)</string>
+    <string name="historical_site_description3">A 110-story skyscraper with an observation deck.</string>
+    <string name="historical_site_place3">233 S Wacker Dr, Chicago, IL 60606</string>
+    <string name="historical_site_open3">9:00 AM</string>
+    <string name="historical_site_close3">10:00 PM</string>
+
+    <string name="historical_site_name4">Robie House</string>
+    <string name="historical_site_description4">A landmark building designed by architect Frank Lloyd Wright.</string>
+    <string name="historical_site_place4">5757 S Woodlawn Ave, Chicago, IL 60637</string>
+    <string name="historical_site_open4">10:30 AM</string>
+    <string name="historical_site_close4">3:00 PM</string>
+
+    <string name="historical_site_name5">Chicago Water Tower</string>
+    <string name="historical_site_description5">A historic water tower in the Near North Side community area.</string>
+    <string name="historical_site_place5">806 N Michigan Ave, Chicago, IL 60611</string>
+    <string name="historical_site_open5">10:00 AM</string>
+    <string name="historical_site_close5">5:00 PM</string>
+
+    <string name="open">Open : </string>
+    <string name="close">Close : </string>
+
 </resources>

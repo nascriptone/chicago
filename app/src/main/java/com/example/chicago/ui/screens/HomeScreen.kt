@@ -27,16 +27,16 @@ import com.example.chicago.ui.theme.ChicagoTheme
 
 @Composable
 fun HomeScreen(
-    onClick: () -> Unit,
+    onCardClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val data = DataSource.categoryList
-    LazyColumn(modifier) {
+    LazyColumn(modifier = modifier.padding(horizontal = 8.dp)) {
         items(data) { category ->
             CategoryCard(
                 category = category,
-                onCardClick = onClick,
-                modifier = Modifier.padding(vertical = 8.dp, horizontal = 4.dp)
+                onCardClick = { onCardClick(category.title) },
+                modifier = Modifier.padding(8.dp)
             )
         }
     }

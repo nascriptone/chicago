@@ -1,8 +1,9 @@
 package com.example.chicago.models
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
 data class Category(
     @DrawableRes val image: Int,
-    val title: Int = 900
+    @StringRes val title: Int
 )
