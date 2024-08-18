@@ -2,6 +2,7 @@ package com.example.chicago.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Icon
@@ -24,19 +27,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.chicago.data.DataSource
+import com.example.chicago.R
 import com.example.chicago.models.Recommend
-import com.example.chicago.ui.theme.ChicagoTheme
 
 @Composable
-fun DetailScreen(modifier: Modifier = Modifier) {
-
-    val details: Recommend = DataSource.listOfRecommendations[3].list[4]
+fun DetailScreen(
+    details: Recommend,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .background(color = MaterialTheme.colorScheme.background)
             .padding(horizontal = 12.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -55,16 +58,17 @@ fun DetailScreen(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(28.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Column {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
                 Text(
                     text = stringResource(id = details.name),
-                    modifier = Modifier.padding(16.dp),
                     style = MaterialTheme.typography.titleLarge
                 )
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(id = details.description),
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(16.dp)
                 )
             }
         }
@@ -92,9 +96,22 @@ fun DetailScreen(modifier: Modifier = Modifier) {
                 }
 
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-
+                    if (details.open != null) {
+                        val open = stringResource(id = R.string.open)
+                        val openTime = stringResource(id = details.open)
+                        Text(text = "$open $openTime")
+                    }
+                    if (details.close != null) {
+                        val close = stringResource(id = R.string.close)
+                        val closeTime = stringResource(id = details.close)
+                        Text(text = "$close $closeTime")
+                    }
                 }
             }
         }
@@ -102,10 +119,12 @@ fun DetailScreen(modifier: Modifier = Modifier) {
 }
 
 
-@Preview
-@Composable
-fun DetailsScreenPreview() {
-    ChicagoTheme(darkTheme = true) {
-        DetailScreen()
-    }
-}
+//@Preview
+//@Composable
+//fun DetailsScreenPreview() {
+//    ChicagoTheme(darkTheme = true) {
+//        DetailScreen(
+//            details = DataSource.categoryList[4].recommendations[3]
+//        )
+//    }
+//}

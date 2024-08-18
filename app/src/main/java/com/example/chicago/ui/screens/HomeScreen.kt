@@ -2,6 +2,7 @@ package com.example.chicago.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,17 +28,26 @@ import com.example.chicago.ui.theme.ChicagoTheme
 
 @Composable
 fun HomeScreen(
-    onCardClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    onCardClick: (Category) -> Unit,
+    modifier: Modifier = Modifier,
+    data: List<Category> = DataSource.categoryList
 ) {
-    val data = DataSource.categoryList
-    LazyColumn(modifier = modifier.padding(horizontal = 8.dp)) {
+    LazyColumn(modifier = modifier) {
+
+        item {
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
         items(data) { category ->
             CategoryCard(
                 category = category,
-                onCardClick = { onCardClick(category.title) },
-                modifier = Modifier.padding(8.dp)
+                onCardClick = { onCardClick(category) },
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
             )
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(80.dp))
         }
     }
 }
@@ -59,7 +69,7 @@ fun CategoryCard(
                 contentDescription = category.title.toString(),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(210.dp)
+                    .height(240.dp)
                     .alpha(0.8F),
                 contentScale = ContentScale.Crop,
             )
