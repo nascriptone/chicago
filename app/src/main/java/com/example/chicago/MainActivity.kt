@@ -15,6 +15,7 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import com.example.chicago.ui.ChicagoApp
 import com.example.chicago.ui.theme.ChicagoTheme
 
 class MainActivity : ComponentActivity() {
