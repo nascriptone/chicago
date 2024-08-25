@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -42,7 +43,7 @@ fun HomeScreen(
             CategoryCard(
                 category = category,
                 onCardClick = { onCardClick(category) },
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                modifier = Modifier.padding(8.dp)
             )
         }
 
@@ -61,6 +62,7 @@ fun CategoryCard(
 ) {
     Card(
         onClick = onCardClick,
+        shape = RoundedCornerShape(20.dp),
         modifier = modifier
     ) {
         Box {
