@@ -88,6 +88,7 @@ fun ChicagoApp(
                 innerPadding = innerPadding,
                 navController = navController
             )
+
             else -> AppDefaultLayout(
                 uiState = uiState,
                 viewModel = viewModel,

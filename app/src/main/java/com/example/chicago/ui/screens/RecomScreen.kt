@@ -10,24 +10,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.chicago.data.DataSource
 import com.example.chicago.models.Category
 import com.example.chicago.models.Recommend
+import com.example.chicago.ui.theme.ChicagoTheme
 
 @Composable
 fun RecomScreen(
@@ -35,7 +35,7 @@ fun RecomScreen(
     onCardClick: (Recommend) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier = modifier.padding(horizontal = 8.dp)) {
+    LazyColumn(modifier = modifier) {
         item {
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -44,7 +44,7 @@ fun RecomScreen(
             RecomCard(
                 recommend = item,
                 onCardClick = { onCardClick(item) },
-                modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)
+                modifier = Modifier.padding(8.dp)
             )
         }
 
@@ -61,37 +61,39 @@ fun RecomCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(),
         onClick = onCardClick,
         modifier = modifier,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        )
+        shape = MaterialTheme.shapes.extraLarge
     ) {
+        Image(
+            painter = painterResource(id = recommend.image),
+            contentDescription = stringResource(
+                id = recommend.name
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
+            contentScale = ContentScale.Crop
+        )
         Column(
-            modifier = Modifier.padding(8.dp, 8.dp, 8.dp, 20.dp)
-        ) {
-            Image(
-                painter = painterResource(id = recommend.image),
-                contentDescription = stringResource(
-                    id = recommend.name
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop
+            modifier = Modifier.padding(
+                horizontal = 12.dp,
+                vertical = 16.dp
             )
-            Spacer(modifier = Modifier.height(12.dp))
+        ) {
             Text(
                 text = stringResource(id = recommend.name),
                 style = MaterialTheme.typography.titleLarge
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(top = 4.dp)
             ) {
-                Icon(imageVector = Icons.Default.LocationOn, contentDescription = null)
+                Icon(
+                    tint = MaterialTheme.colorScheme.surfaceTint,
+                    imageVector = Icons.Default.LocationOn,
+                    contentDescription = null
+                )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = stringResource(id = recommend.place),
@@ -103,10 +105,10 @@ fun RecomCard(
 }
 
 
-//@Preview
-//@Composable
-//fun RecomCardPreview() {
-//    ChicagoTheme {
-//        RecomCard(recommend = , onCardClick = {})
-//    }
-//}
+@Preview
+@Composable
+fun RecomCardPreview() {
+    ChicagoTheme {
+        RecomCard(recommend = DataSource.categoryList[5].recommendations[3], onCardClick = {})
+    }
+}

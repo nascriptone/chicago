@@ -62,7 +62,7 @@ fun CategoryCard(
 ) {
     Card(
         onClick = onCardClick,
-        shape = RoundedCornerShape(20.dp),
+        shape = MaterialTheme.shapes.extraLarge,
         modifier = modifier
     ) {
         Box {

@@ -41,7 +41,7 @@ fun DetailScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .background(color = MaterialTheme.colorScheme.background)
-            .padding(horizontal = 12.dp), horizontalAlignment = Alignment.CenterHorizontally
+            .padding(horizontal = 8.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val painter = painterResource(id = details.image)
         Spacer(modifier = Modifier.height(12.dp))
