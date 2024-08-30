@@ -36,29 +36,26 @@ fun AppTopBar(
     val currentScreen = ChicagoScreens.valueOf(
         backStackEntry?.destination?.route ?: ChicagoScreens.Home.name
     )
-    TopAppBar(
-        title = {
-            Text(
-                text = if (currentScreen == ChicagoScreens.Recommendation) {
-                    stringResource(id = categoryTitle)
-                } else {
-                    stringResource(id = currentScreen.title)
-                }
-            )
-        },
-        navigationIcon = {
-            if (currentScreen != ChicagoScreens.Home) {
-                IconButton(
-                    onClick = onBackPress
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                        contentDescription = stringResource(id = R.string.back)
-                    )
-                }
+    TopAppBar(title = {
+        Text(
+            text = if (currentScreen == ChicagoScreens.Recommendation) {
+                stringResource(id = categoryTitle)
+            } else {
+                stringResource(id = currentScreen.title)
             }
-        },
-        modifier = modifier
+        )
+    }, navigationIcon = {
+        if (currentScreen != ChicagoScreens.Home) {
+            IconButton(
+                onClick = onBackPress
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                    contentDescription = stringResource(id = R.string.back)
+                )
+            }
+        }
+    }, modifier = modifier
     )
 }
 
@@ -71,15 +68,15 @@ fun ChicagoApp(
     val uiState by viewModel.uiState.collectAsState()
     val backStackEntry by navController.currentBackStackEntryAsState()
 
-    Scaffold(topBar = {
-        AppTopBar(
-            backStackEntry = backStackEntry,
-            categoryTitle = uiState.currentCategory.title,
-            onBackPress = {
-                navController.navigateUp()
-            }
-        )
-    }) { innerPadding ->
+    Scaffold(
+        topBar = {
+            AppTopBar(backStackEntry = backStackEntry,
+                categoryTitle = uiState.currentCategory.title,
+                onBackPress = {
+                    navController.navigateUp()
+                })
+        }
+    ) { innerPadding ->
 
         when (windowSize) {
             WindowWidthSizeClass.Expanded -> AppExpandedLayout(
@@ -92,33 +89,11 @@ fun ChicagoApp(
             else -> AppDefaultLayout(
                 uiState = uiState,
                 viewModel = viewModel,
+                windowSize = windowSize,
                 innerPadding = innerPadding,
                 navController = navController
             )
         }
 
-//        NavHost(
-//            navController = navController,
-//            startDestination = ChicagoScreens.Home.name,
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(innerPadding),
-//        ) {
-//            composable(route = ChicagoScreens.Home.name) {
-//                HomeScreen(onCardClick = {
-//                    viewModel.updateCategory(it)
-//                    navController.navigate(ChicagoScreens.Recommendation.name)
-//                })
-//            }
-//            composable(route = ChicagoScreens.Recommendation.name) {
-//                RecomScreen(selectedCategory = uiState.currentCategory, onCardClick = {
-//                    viewModel.updateUserSelected(it)
-//                    navController.navigate(ChicagoScreens.Details.name)
-//                })
-//            }
-//            composable(route = ChicagoScreens.Details.name) {
-//                DetailScreen(details = uiState.userSelectedCurrent)
-//            }
-//        }
     }
 }
