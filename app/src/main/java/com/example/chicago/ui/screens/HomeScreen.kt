@@ -28,9 +28,9 @@ import com.example.chicago.ui.theme.ChicagoTheme
 
 @Composable
 fun HomeScreen(
+    data: List<Category>,
     onCardClick: (Category) -> Unit,
     modifier: Modifier = Modifier,
-    data: List<Category> = DataSource.categoryList
 ) {
     LazyColumn(modifier = modifier) {
 
