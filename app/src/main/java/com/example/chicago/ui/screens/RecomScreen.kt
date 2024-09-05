@@ -16,6 +16,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,15 +28,49 @@ import androidx.compose.ui.unit.dp
 import com.example.chicago.data.DataSource
 import com.example.chicago.models.Category
 import com.example.chicago.models.Recommend
+import com.example.chicago.ui.AppUIState
+import com.example.chicago.ui.layout.HomeScreenExpanded
 import com.example.chicago.ui.theme.ChicagoTheme
+import com.example.chicago.ui.viewmodel.ChicagoViewModel
 
 @Composable
 fun RecomScreen(
+    data: List<Category>,
+    selectedCategory: Category,
+    onCardClick: (Recommend) -> Unit,
+    viewModel: ChicagoViewModel,
+    uiState: AppUIState,
+    windowWidthSizeClass: WindowWidthSizeClass,
+    modifier: Modifier = Modifier
+) {
+
+    if (windowWidthSizeClass == WindowWidthSizeClass.Expanded) {
+        HomeScreenExpanded(
+            data = data,
+            selectedCategory = uiState.currentCategory,
+            onHomeCardClick = {
+                viewModel.updateCategory(it)
+            },
+            onRecomCardClick = onCardClick
+        )
+    } else {
+        RecomScreenContent(
+            selectedCategory = selectedCategory,
+            onCardClick = onCardClick,
+            modifier = modifier
+        )
+    }
+
+}
+
+@Composable
+fun RecomScreenContent(
     selectedCategory: Category,
     onCardClick: (Recommend) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
+
         item {
             Spacer(modifier = Modifier.height(16.dp))
         }

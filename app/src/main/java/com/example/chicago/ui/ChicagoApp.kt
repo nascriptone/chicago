@@ -29,8 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.chicago.R
 import com.example.chicago.data.DataSource
 import com.example.chicago.models.Category
-import com.example.chicago.ui.layout.DetailsScreenExpanded
-import com.example.chicago.ui.layout.HomeScreenExpanded
+import com.example.chicago.models.Recommend
 import com.example.chicago.ui.screens.ChicagoScreens
 import com.example.chicago.ui.screens.DetailScreen
 import com.example.chicago.ui.screens.HomeScreen
@@ -92,13 +91,30 @@ fun ChicagoApp(
         backStackEntry?.destination?.route ?: ChicagoScreens.Home.name
     )
 
+    val previousScreen = ChicagoScreens.valueOf(
+        navController.previousBackStackEntry?.destination?.route ?: ChicagoScreens.Home.name
+    )
+
 
     Scaffold(topBar = {
         AppTopBar(windowSize = windowSize,
             currentScreen = currentScreen,
             categoryTitle = uiState.currentCategory.title,
             onBackPress = {
-                navController.navigateUp()
+
+                if (previousScreen == ChicagoScreens.Home && currentScreen == ChicagoScreens.Details) {
+                    navController.navigate(
+                        ChicagoScreens.Recommendation.name
+                    ) {
+                        popUpTo(
+                            currentScreen.name
+                        ) {
+                            inclusive = true
+                        }
+                    }
+                } else {
+                    navController.navigateUp()
+                }
             })
     }) { innerPadding ->
 
@@ -112,6 +128,11 @@ fun ChicagoApp(
             val suitableWidth = if (windowSize == WindowWidthSizeClass.Medium) 0.7F
             else 1F
 
+            fun goToDetailsScreen(data: Recommend) {
+                viewModel.updateUserSelected(data)
+                navController.navigate(ChicagoScreens.Details.name)
+            }
+
             NavHost(
                 navController = navController,
                 startDestination = ChicagoScreens.Home.name,
@@ -120,39 +141,38 @@ fun ChicagoApp(
                     .padding(horizontal = 4.dp)
             ) {
                 composable(route = ChicagoScreens.Home.name) {
-                    if (windowSize == WindowWidthSizeClass.Expanded) {
-                        HomeScreenExpanded(
-                            onButtonClick = {
-                                navController.navigate(ChicagoScreens.Details.name)
-                            },
-                        )
-                    } else {
-                        HomeScreen(data = data, onCardClick = {
+                    HomeScreen(
+                        data = data,
+                        windowWidthSizeClass = windowSize,
+                        viewModel = viewModel,
+                        uiState = uiState,
+                        onCardClick = {
                             viewModel.updateCategory(it)
                             navController.navigate(ChicagoScreens.Recommendation.name)
-                        })
-                    }
+                        },
+                        onRecomCardClick = {
+                            goToDetailsScreen(it)
+                        }
+                    )
                 }
                 composable(route = ChicagoScreens.Recommendation.name) {
-                    if (windowSize == WindowWidthSizeClass.Expanded) {
-                        HomeScreenExpanded(
-                            onButtonClick = {
-                                navController.navigate(ChicagoScreens.Details.name)
-                            },
-                        )
-                    } else {
-                        RecomScreen(selectedCategory = uiState.currentCategory, onCardClick = {
-                            viewModel.updateUserSelected(it)
-                            navController.navigate(ChicagoScreens.Details.name)
-                        })
-                    }
+                    RecomScreen(
+                        data = data,
+                        selectedCategory = uiState.currentCategory,
+                        windowWidthSizeClass = windowSize,
+                        viewModel = viewModel,
+                        uiState = uiState,
+                        onCardClick = {
+                            goToDetailsScreen(it)
+                        }
+
+                    )
                 }
                 composable(route = ChicagoScreens.Details.name) {
-                    if (windowSize == WindowWidthSizeClass.Expanded) {
-                        DetailsScreenExpanded()
-                    } else {
-                        DetailScreen(details = uiState.userSelectedCurrent)
-                    }
+                    DetailScreen(
+                        details = uiState.userSelectedCurrent,
+                        windowWidthSizeClass = windowSize
+                    )
                 }
             }
         }

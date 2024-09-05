@@ -4,20 +4,29 @@ import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.chicago.data.DataSource
+import com.example.chicago.models.Category
+import com.example.chicago.models.Recommend
+import com.example.chicago.ui.screens.HomeScreenContent
+import com.example.chicago.ui.screens.RecomScreenContent
+import com.example.chicago.ui.theme.ChicagoTheme
 
 @Composable
 fun HomeScreenExpanded(
-    onButtonClick: () -> Unit,
-    modifier: Modifier = Modifier
+    data: List<Category>,
+    selectedCategory: Category,
+    modifier: Modifier = Modifier,
+    onHomeCardClick: (Category) -> Unit = {},
+    onRecomCardClick: (Recommend) -> Unit = {}
 ) {
 
     // To Exit from the app when user click the back button.
@@ -26,26 +35,30 @@ fun HomeScreenExpanded(
         activity?.finish()
     }
 
-
     Row(
         modifier = modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.primaryContainer)
+            .padding(horizontal = 12.dp)
     ) {
-        Column(
-            modifier = Modifier.weight(1F)
-        ) {
-            Text(text = "This is the Pane for HomeScreen contents")
-        }
-        Column(
+        Box(
             modifier = Modifier
+                .fillMaxSize()
                 .weight(1F)
-                .background(MaterialTheme.colorScheme.onPrimaryContainer)
         ) {
-            Text(text = "This is the pane for recom contents")
-            Button(onClick = onButtonClick) {
-                Text(text = "Check Details")
-            }
+            HomeScreenContent(
+                data = data,
+                onCardClick = onHomeCardClick
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1F)
+        ) {
+            RecomScreenContent(
+                selectedCategory = selectedCategory,
+                onCardClick = onRecomCardClick
+            )
         }
     }
 }
@@ -57,13 +70,18 @@ fun DetailsScreenExpanded(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.secondaryContainer)
     ) {
-        Box(
-            modifier = Modifier.background(MaterialTheme.colorScheme.onSecondaryContainer)
-        ) {
-            Text(text = "This is the pane for the Image")
-        }
-        Column {
-            Text(text = "This is the column for details")
-        }
+
+    }
+}
+
+@Preview
+@Composable
+fun HomeScreenExpandedPreview() {
+    ChicagoTheme {
+        val data = DataSource.categoryList
+        HomeScreenExpanded(
+            data = data,
+            selectedCategory = data.first()
+        )
     }
 }

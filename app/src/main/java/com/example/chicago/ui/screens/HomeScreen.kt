@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,14 +24,48 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.chicago.data.DataSource
 import com.example.chicago.models.Category
+import com.example.chicago.models.Recommend
+import com.example.chicago.ui.AppUIState
+import com.example.chicago.ui.layout.HomeScreenExpanded
 import com.example.chicago.ui.theme.ChicagoTheme
-
+import com.example.chicago.ui.viewmodel.ChicagoViewModel
 
 @Composable
 fun HomeScreen(
     data: List<Category>,
+    viewModel: ChicagoViewModel,
+    uiState: AppUIState,
     onCardClick: (Category) -> Unit,
+    onRecomCardClick: (Recommend) -> Unit,
+    windowWidthSizeClass: WindowWidthSizeClass,
     modifier: Modifier = Modifier,
+) {
+
+    if (windowWidthSizeClass == WindowWidthSizeClass.Expanded) {
+        HomeScreenExpanded(
+            data = data,
+            selectedCategory = uiState.currentCategory,
+            onHomeCardClick = {
+                viewModel.updateCategory(it)
+            },
+            onRecomCardClick = {
+                onRecomCardClick(it)
+            }
+        )
+    } else {
+        HomeScreenContent(
+            data = data,
+            onCardClick = onCardClick,
+            modifier = modifier
+        )
+    }
+}
+
+@Composable
+fun HomeScreenContent(
+    data: List<Category>,
+    onCardClick: (Category) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
 
