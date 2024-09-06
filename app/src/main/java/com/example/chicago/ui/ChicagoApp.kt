@@ -12,6 +12,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -46,7 +47,8 @@ fun AppTopBar(
     modifier: Modifier = Modifier
 ) {
 
-    TopAppBar(title = {
+    TopAppBar(
+        title = {
         val title = if (currentScreen == ChicagoScreens.Recommendation) {
             if (windowSize != WindowWidthSizeClass.Expanded) {
                 stringResource(id = categoryTitle)
@@ -80,9 +82,11 @@ fun AppTopBar(
 fun ChicagoApp(
     viewModel: ChicagoViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
-    windowSize: WindowWidthSizeClass,
+    windowSize: WindowSizeClass,
 ) {
 
+    val windowWidthSize = windowSize.widthSizeClass
+    val windowHeightSize = windowSize.heightSizeClass
     val data: List<Category> = DataSource.categoryList
     val uiState by viewModel.uiState.collectAsState()
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -97,7 +101,7 @@ fun ChicagoApp(
 
 
     Scaffold(topBar = {
-        AppTopBar(windowSize = windowSize,
+        AppTopBar(windowSize = windowWidthSize,
             currentScreen = currentScreen,
             categoryTitle = uiState.currentCategory.title,
             onBackPress = {
@@ -125,7 +129,7 @@ fun ChicagoApp(
                 .padding(innerPadding),
         ) {
 
-            val suitableWidth = if (windowSize == WindowWidthSizeClass.Medium) 0.7F
+            val suitableWidth = if (windowWidthSize == WindowWidthSizeClass.Medium) 0.7F
             else 1F
 
             fun goToDetailsScreen(data: Recommend) {
@@ -143,7 +147,8 @@ fun ChicagoApp(
                 composable(route = ChicagoScreens.Home.name) {
                     HomeScreen(
                         data = data,
-                        windowWidthSizeClass = windowSize,
+                        windowWidthSizeClass = windowWidthSize,
+                        windowHeightSizeClass = windowHeightSize,
                         viewModel = viewModel,
                         uiState = uiState,
                         onCardClick = {
@@ -159,7 +164,8 @@ fun ChicagoApp(
                     RecomScreen(
                         data = data,
                         selectedCategory = uiState.currentCategory,
-                        windowWidthSizeClass = windowSize,
+                        windowWidthSizeClass = windowWidthSize,
+                        windowHeightSizeClass = windowHeightSize,
                         viewModel = viewModel,
                         uiState = uiState,
                         onCardClick = {
@@ -171,7 +177,7 @@ fun ChicagoApp(
                 composable(route = ChicagoScreens.Details.name) {
                     DetailScreen(
                         details = uiState.userSelectedCurrent,
-                        windowWidthSizeClass = windowSize
+                        windowWidthSizeClass = windowWidthSize
                     )
                 }
             }

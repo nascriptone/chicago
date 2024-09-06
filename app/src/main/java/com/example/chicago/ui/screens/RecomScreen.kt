@@ -16,6 +16,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,6 +42,7 @@ fun RecomScreen(
     viewModel: ChicagoViewModel,
     uiState: AppUIState,
     windowWidthSizeClass: WindowWidthSizeClass,
+    windowHeightSizeClass: WindowHeightSizeClass,
     modifier: Modifier = Modifier
 ) {
 
@@ -48,6 +50,8 @@ fun RecomScreen(
         HomeScreenExpanded(
             data = data,
             selectedCategory = uiState.currentCategory,
+            windowWidthSizeClass = windowWidthSizeClass,
+            windowHeightSizeClass = windowHeightSizeClass,
             onHomeCardClick = {
                 viewModel.updateCategory(it)
             },
@@ -125,7 +129,7 @@ fun RecomCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
-                    tint = MaterialTheme.colorScheme.surfaceTint,
+                    tint = MaterialTheme.colorScheme.onSurface,
                     imageVector = Icons.Default.LocationOn,
                     contentDescription = null
                 )

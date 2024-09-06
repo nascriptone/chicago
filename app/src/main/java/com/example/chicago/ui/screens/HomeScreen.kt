@@ -11,16 +11,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.chicago.data.DataSource
 import com.example.chicago.models.Category
@@ -38,6 +39,7 @@ fun HomeScreen(
     onCardClick: (Category) -> Unit,
     onRecomCardClick: (Recommend) -> Unit,
     windowWidthSizeClass: WindowWidthSizeClass,
+    windowHeightSizeClass: WindowHeightSizeClass,
     modifier: Modifier = Modifier,
 ) {
 
@@ -45,6 +47,8 @@ fun HomeScreen(
         HomeScreenExpanded(
             data = data,
             selectedCategory = uiState.currentCategory,
+            windowWidthSizeClass = windowWidthSizeClass,
+            windowHeightSizeClass = windowHeightSizeClass,
             onHomeCardClick = {
                 viewModel.updateCategory(it)
             },
@@ -56,6 +60,8 @@ fun HomeScreen(
         HomeScreenContent(
             data = data,
             onCardClick = onCardClick,
+            windowWidthSizeClass = windowWidthSizeClass,
+            windowHeightSizeClass = windowHeightSizeClass,
             modifier = modifier
         )
     }
@@ -65,8 +71,17 @@ fun HomeScreen(
 fun HomeScreenContent(
     data: List<Category>,
     onCardClick: (Category) -> Unit,
+    windowWidthSizeClass: WindowWidthSizeClass,
+    windowHeightSizeClass: WindowHeightSizeClass,
     modifier: Modifier = Modifier
 ) {
+
+    val cardSuitableHeight: Dp =
+        if (
+            windowWidthSizeClass == WindowWidthSizeClass.Expanded &&
+            windowHeightSizeClass != WindowHeightSizeClass.Compact
+        ) 320.dp
+        else 260.dp
     LazyColumn(modifier = modifier) {
 
         item {
@@ -77,6 +92,7 @@ fun HomeScreenContent(
             CategoryCard(
                 category = category,
                 onCardClick = { onCardClick(category) },
+                cardSuitableHeight = cardSuitableHeight,
                 modifier = Modifier.padding(8.dp)
             )
         }
@@ -92,7 +108,8 @@ fun HomeScreenContent(
 fun CategoryCard(
     category: Category,
     onCardClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    cardSuitableHeight: Dp = 260.dp
 ) {
     Card(
         onClick = onCardClick,
@@ -105,14 +122,13 @@ fun CategoryCard(
                 contentDescription = category.title.toString(),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(240.dp)
-                    .alpha(0.8F),
+                    .height(cardSuitableHeight),
                 contentScale = ContentScale.Crop,
             )
             Text(
                 text = stringResource(id = category.title),
                 color = Color.White,
-                style = MaterialTheme.typography.displaySmall,
+                style = MaterialTheme.typography.displayMedium,
                 modifier = Modifier.align(Alignment.Center)
             )
         }

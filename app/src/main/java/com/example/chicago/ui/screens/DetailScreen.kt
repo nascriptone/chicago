@@ -40,7 +40,10 @@ fun DetailScreen(
 ) {
 
     if (windowWidthSizeClass == WindowWidthSizeClass.Expanded) {
-        DetailsScreenExpanded()
+        DetailsScreenExpanded(
+            details = details,
+            modifier = modifier
+        )
     } else {
         DetailsScreenContent(
             details = details,
@@ -61,80 +64,97 @@ fun DetailsScreenContent(
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 8.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val painter = painterResource(id = details.image)
-        Spacer(modifier = Modifier.height(12.dp))
-        Image(
-            painter = painter,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(28.dp)),
-            contentScale = ContentScale.FillWidth,
-            contentDescription = stringResource(id = details.name)
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        Surface(
-            color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(28.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(
-                    text = stringResource(id = details.name),
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(id = details.description),
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-        Surface(
-            color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(28.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.LocationOn,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.secondary
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = stringResource(id = details.place),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    if (details.open != null) {
-                        val open = stringResource(id = R.string.open)
-                        val openTime = stringResource(id = details.open)
-                        Text(text = "$open $openTime")
-                    }
-                    if (details.close != null) {
-                        val close = stringResource(id = R.string.close)
-                        val closeTime = stringResource(id = details.close)
-                        Text(text = "$close $closeTime")
-                    }
+        Spacer(modifier = Modifier.height(12.dp))
+        DetailsScreenImageContent(details)
+        Spacer(modifier = Modifier.height(20.dp))
+        DetailsScreenMainDetails(details)
+    }
+}
+
+@Composable
+fun DetailsScreenImageContent(
+    details: Recommend,
+    modifier: Modifier = Modifier
+) {
+    val painter = painterResource(id = details.image)
+    Image(
+        painter = painter,
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(28.dp)),
+        contentScale = ContentScale.Crop,
+        contentDescription = stringResource(id = details.name)
+    )
+}
+
+@Composable
+fun DetailsScreenMainDetails(
+    details: Recommend,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(28.dp),
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = stringResource(id = details.name),
+                style = MaterialTheme.typography.titleLarge
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = stringResource(id = details.description),
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
+    }
+    Spacer(modifier = Modifier.height(20.dp))
+    Surface(
+        color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(28.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.LocationOn,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.secondary
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = stringResource(id = details.place),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                if (details.open != null) {
+                    val open = stringResource(id = R.string.open)
+                    val openTime = stringResource(id = details.open)
+                    Text(text = "$open $openTime")
+                }
+                if (details.close != null) {
+                    val close = stringResource(id = R.string.close)
+                    val closeTime = stringResource(id = details.close)
+                    Text(text = "$close $closeTime")
                 }
             }
         }
-        Spacer(modifier = Modifier.height(40.dp))
     }
+    Spacer(modifier = Modifier.height(40.dp))
 }
 
 
